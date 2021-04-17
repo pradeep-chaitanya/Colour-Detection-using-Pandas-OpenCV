@@ -39,8 +39,9 @@ First, we created a window in which the input image will display. Then, we set a
     
 **    5. Create the draw_function
 **    It will calculate the rgb values of the pixel which we double click. The function parameters have the event name, (x,y) coordinates of the mouse position, etc. In the function, we check if the event is double-clicked then we calculate and set the r,g,b values along with x,y positions of the mouse.
-    def draw_function(event, x,y,flags,param):
-    if event == cv2.EVENT_LBUTTONDBLCLK:
+
+             def draw_function(event, x,y,flags,param):
+        if event == cv2.EVENT_LBUTTONDBLCLK:
         global b,g,r,xpos,ypos, clicked
         clicked = True
         xpos = x
@@ -53,11 +54,11 @@ First, we created a window in which the input image will display. Then, we set a
 **        6. Calculate distance to get color name
 **We have the r,g and b values. Now, we need another function which will return us the color name from RGB values. To get the color name, we calculate a distance(d) which tells us how close we are to color and choose the one having minimum distance.
 
-Our distance is calculated by this formula:
+    Our distance is calculated by this formula:
 
-d = abs(Red – ithRedColor) + (Green – ithGreenColor) + (Blue – ithBlueColor)
+    d = abs(Red – ithRedColor) + (Green – ithGreenColor) + (Blue – ithBlueColor)
 
-def getColorName(R,G,B):
+    def getColorName(R,G,B):
     minimum = 10000
     for i in range(len(csv)):
         d = abs(R- int(csv.loc[i,"R"])) + abs(G- int(csv.loc[i,"G"]))+ abs(B- int(csv.loc[i,"B"]))
@@ -72,7 +73,7 @@ def getColorName(R,G,B):
 
 Using the cv2.imshow() function, we draw the image on the window. When the user double clicks the window, we draw a rectangle and get the color name to draw text on the window using cv2.rectangle and cv2.putText() functions.
 
-while(1):
+    while(1):
     cv2.imshow("image",img)
     if (clicked):
         #cv2.rectangle(image, startpoint, endpoint, color, thickness) -1 thickness fills rectangle entirely
@@ -83,7 +84,7 @@ while(1):
 
         #cv2.putText(img,text,start,font(0-7), fontScale, color, thickness, lineType, (optional bottomLeft bool) )
         cv2.putText(img, text,(50,50),2,0.8,(255,255,255),2,cv2.LINE_AA)
-  #For very light colours we will display text in black colour
+      #For very light colours we will display text in black colour
         if(r+g+b>=600):
             cv2.putText(img, text,(50,50),2,0.8,(0,0,0),2,cv2.LINE_AA)
 
@@ -93,13 +94,13 @@ while(1):
     if cv2.waitKey(20) & 0xFF ==27:
         break
 
-cv2.destroyAllWindows()
+    cv2.destroyAllWindows()
 
 
 **8. Run Python File
 **The beginner Python project is now complete, you can run the Python file from the command prompt. Make sure to give an image path using ‘-i’ argument. If the image is in another directory, then you need to give full path of the image:
 
-python color_detection.py -i <add your image path here>
+    python color_detection.py -i <add your image path here>
 
         
         
